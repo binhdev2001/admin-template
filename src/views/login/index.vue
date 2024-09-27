@@ -17,7 +17,7 @@
           :rules="rules"
         >
           <n-form-item path="username">
-            <n-input v-model:value="formInline.username" placeholder="请输入用户名">
+            <n-input v-model:value="formInline.username" placeholder="Vui lòng nhập tên người dùng">
               <template #prefix>
                 <n-icon size="18" color="#808695">
                   <PersonOutline />
@@ -30,7 +30,7 @@
               v-model:value="formInline.password"
               type="password"
               showPasswordOn="click"
-              placeholder="请输入密码"
+              placeholder="Vui lòng nhập mật khẩu"
             >
               <template #prefix>
                 <n-icon size="18" color="#808695">
@@ -42,22 +42,22 @@
           <n-form-item class="default-color">
             <div class="flex justify-between">
               <div class="flex-initial">
-                <n-checkbox v-model:checked="autoLogin">自动登录</n-checkbox>
+                <n-checkbox v-model:checked="autoLogin">Tự động đăng nhập</n-checkbox>
               </div>
               <div class="flex-initial order-last">
-                <a href="javascript:">忘记密码</a>
+                <a href="javascript:">Quên mật khẩu</a>
               </div>
             </div>
           </n-form-item>
           <n-form-item>
             <n-button type="primary" @click="handleSubmit" size="large" :loading="loading" block>
-              登录
+              Đăng nhập
             </n-button>
           </n-form-item>
           <n-form-item class="default-color">
             <div class="flex view-account-other">
               <div class="flex-initial">
-                <span>其它登录方式</span>
+                <span>Các cách đăng nhập khác</span>
               </div>
               <div class="flex-initial mx-2">
                 <a href="javascript:">
@@ -74,7 +74,7 @@
                 </a>
               </div>
               <div class="flex-initial" style="margin-left: auto">
-                <a href="javascript:">注册账号</a>
+                <a href="javascript:">Đăng ký tài khoản</a>
               </div>
             </div>
           </n-form-item>
@@ -111,8 +111,8 @@
   });
 
   const rules = {
-    username: { required: true, message: '请输入用户名', trigger: 'blur' },
-    password: { required: true, message: '请输入密码', trigger: 'blur' },
+    username: { required: true, message: 'Vui lòng nhập tên người dùng', trigger: 'blur' },
+    password: { required: true, message: 'Vui lòng nhập mật khẩu', trigger: 'blur' },
   };
 
   const userStore = useUserStore();
@@ -125,7 +125,7 @@
     formRef.value.validate(async (errors) => {
       if (!errors) {
         const { username, password } = formInline;
-        message.loading('登录中...');
+        message.loading('Đang đăng nhập...');
         loading.value = true;
 
         const params: FormState = {
@@ -138,18 +138,18 @@
           message.destroyAll();
           if (code == ResultEnum.SUCCESS) {
             const toPath = decodeURIComponent((route.query?.redirect || '/') as string);
-            message.success('登录成功，即将进入系统');
+            message.success('Đăng nhập thành công, sắp vào hệ thống');
             if (route.name === LOGIN_NAME) {
               router.replace('/');
             } else router.replace(toPath);
           } else {
-            message.info(msg || '登录失败');
+            message.info(msg || 'Đăng nhập thất bại');
           }
         } finally {
           loading.value = false;
         }
       } else {
-        message.error('请填写完整信息，并且进行验证码校验');
+        message.error('Vui lòng điền đầy đủ thông tin và kiểm tra mã xác thực');
       }
     });
   };

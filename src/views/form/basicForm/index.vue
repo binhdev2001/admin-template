@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="n-layout-page-header">
-      <n-card :bordered="false" title="基础表单">
-        表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。表单域标签也可支持响应式。
+      <n-card :bordered="false" title="Biểu Mẫu Cơ Bản">
+        Trang biểu mẫu được sử dụng để thu thập hoặc xác minh thông tin từ người dùng, biểu mẫu cơ bản thường xuất hiện trong các tình huống biểu mẫu có ít mục dữ liệu. Nhãn biểu mẫu cũng có thể hỗ trợ đáp ứng.
       </n-card>
     </div>
     <n-card :bordered="false" class="mt-4 proCard">
@@ -16,46 +16,46 @@
             ref="formRef"
             class="py-8"
           >
-            <n-form-item label="预约姓名" path="name">
-              <n-input v-model:value="formValue.name" placeholder="输入姓名" />
+            <n-form-item label="Tên Đặt Hẹn" path="name">
+              <n-input v-model:value="formValue.name" placeholder="Nhập tên" />
             </n-form-item>
-            <n-form-item label="预约号码" path="mobile">
-              <n-input placeholder="电话号码" v-model:value="formValue.mobile" />
+            <n-form-item label="Số Điện Thoại" path="mobile">
+              <n-input placeholder="Số điện thoại" v-model:value="formValue.mobile" />
             </n-form-item>
-            <n-form-item label="预约时间" path="datetime">
+            <n-form-item label="Thời Gian Đặt Hẹn" path="datetime">
               <n-date-picker type="datetime" v-model:value="formValue.datetime" />
             </n-form-item>
-            <n-form-item label="预约医生" path="doctor">
+            <n-form-item label="Bác Sĩ Đặt Hẹn" path="doctor">
               <n-select
-                placeholder="请选择预约医生"
+                placeholder="Chọn bác sĩ đặt hẹn"
                 :options="doctorList"
                 v-model:value="formValue.doctor"
               />
             </n-form-item>
-            <n-form-item label="预约事项" path="matter">
+            <n-form-item label="Nội Dung Đặt Hẹn" path="matter">
               <n-select
-                placeholder="请选择预约事项"
+                placeholder="Chọn nội dung đặt hẹn"
                 :options="matterList"
                 v-model:value="formValue.matter"
                 multiple
               />
             </n-form-item>
-            <n-form-item label="性别" path="sex">
+            <n-form-item label="Giới Tính" path="sex">
               <n-radio-group v-model:value="formValue.sex" name="sex">
                 <n-space>
-                  <n-radio :value="1">男</n-radio>
-                  <n-radio :value="2">女</n-radio>
+                  <n-radio :value="1">Nam</n-radio>
+                  <n-radio :value="2">Nữ</n-radio>
                 </n-space>
               </n-radio-group>
             </n-form-item>
-            <n-form-item label="预约备注" path="remark">
+            <n-form-item label="Ghi Chú Đặt Hẹn" path="remark">
               <n-input
                 v-model:value="formValue.remark"
                 type="textarea"
-                placeholder="请输入预约备注"
+                placeholder="Nhập ghi chú đặt hẹn"
               />
             </n-form-item>
-            <n-form-item label="图片" path="img">
+            <n-form-item label="Hình Ảnh" path="img">
               <BasicUpload
                 :action="`${uploadUrl}/v1.0/files`"
                 :headers="uploadHeaders"
@@ -65,13 +65,13 @@
                 :height="100"
                 @upload-change="uploadChange"
                 v-model:value="uploadList"
-                helpText="单个文件不超过20MB，最多只能上传10个文件"
+                helpText="Mỗi tệp không quá 20MB, tối đa chỉ có thể tải lên 10 tệp"
               />
             </n-form-item>
             <div style="margin-left: 80px">
               <n-space>
-                <n-button type="primary" @click="formSubmit">提交预约</n-button>
-                <n-button @click="resetForm">重置</n-button>
+                <n-button type="primary" @click="formSubmit">Gửi Đặt Hẹn</n-button>
+                <n-button @click="resetForm">Đặt Lại</n-button>
               </n-space>
             </div>
           </n-form>
@@ -91,30 +91,30 @@
 
   const matterList = [
     {
-      label: '种牙',
+      label: 'Trồng Răng',
       value: 1,
     },
     {
-      label: '补牙',
+      label: 'Trám Răng',
       value: 2,
     },
     {
-      label: '根管',
+      label: 'Điều Trị Tủy',
       value: 3,
     },
   ];
 
   const doctorList = [
     {
-      label: '李医生',
+      label: 'Bác Sĩ Lý',
       value: 1,
     },
     {
-      label: '黄医生',
+      label: 'Bác Sĩ Hoàng',
       value: 2,
     },
     {
-      label: '张医生',
+      label: 'Bác Sĩ Trương',
       value: 3,
     },
   ];
@@ -122,29 +122,29 @@
   const rules = {
     name: {
       required: true,
-      message: '请输入预约姓名',
+      message: 'Vui lòng nhập tên đặt hẹn',
       trigger: 'blur',
     },
     remark: {
       required: true,
-      message: '请输入预约备注',
+      message: 'Vui lòng nhập ghi chú đặt hẹn',
       trigger: 'blur',
     },
     mobile: {
       required: true,
-      message: '请输入预约电话号码',
+      message: 'Vui lòng nhập số điện thoại',
       trigger: ['input'],
     },
     datetime: {
       required: true,
       type: 'number',
-      message: '请选择预约时间',
+      message: 'Vui lòng chọn thời gian đặt hẹn',
       trigger: ['blur', 'change'],
     },
     doctor: {
       required: true,
       type: 'number',
-      message: '请选择预约医生',
+      message: 'Vui lòng chọn bác sĩ đặt hẹn',
       trigger: 'change',
     },
   };
@@ -176,9 +176,9 @@
   function formSubmit() {
     formRef.value.validate((errors) => {
       if (!errors) {
-        message.success('验证成功');
+        message.success('Xác minh thành công');
       } else {
-        message.error('验证失败，请填写完整信息');
+        message.error('Xác minh thất bại, vui lòng điền đầy đủ thông tin');
       }
     });
   }
